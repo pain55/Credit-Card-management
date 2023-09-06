@@ -1,7 +1,11 @@
 package com.credit_card.Credit.Card.Management.Model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Bank {
@@ -13,8 +17,11 @@ public class Bank {
 	private String phoneNumber;
 	
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<User> users;
 	
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bank")
+	private List<CreditCard> creditcards;
 	
 	public Bank() {
 		// TODO Auto-generated constructor stub
@@ -24,6 +31,20 @@ public class Bank {
 	
 	
 	
+	public Bank(long bankId, String bankName, String address, String phoneNumber, List<User> users,
+			List<CreditCard> creditcards) {
+		this.bankId = bankId;
+		this.bankName = bankName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.users = users;
+		this.creditcards = creditcards;
+	}
+
+
+
+
+
 	public long getBankId() {
 		return bankId;
 	}
@@ -47,6 +68,38 @@ public class Bank {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+
+
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+
+
+
+
+	public List<CreditCard> getCreditcards() {
+		return creditcards;
+	}
+
+
+
+
+
+	public void setCreditcards(List<CreditCard> creditcards) {
+		this.creditcards = creditcards;
 	}
 	
 	
